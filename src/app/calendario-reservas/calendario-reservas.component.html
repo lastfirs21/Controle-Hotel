@@ -1,0 +1,138 @@
+<div class="row m-5 container justify-content-center">
+  <div class="col-6">
+    <div class="calendario-titulo row bg-dark p-2">
+      <div class="col-4 text-center">
+        <button class="btn btn-outline-light" (click)="alterarMes(-1)">
+          Ant.
+        </button>
+      </div>
+
+      <div
+        class="calendario-titulo-mes-ano col-4 text-center text-uppercase fw-bold"
+        style="color: white"
+      >
+        {{ dataAtual | date: "MMM yyyy" }}
+        <br />
+      </div>
+      <div class="col-4 text-center">
+        <button
+          type="menu"
+          class="btn btn-outline-light"
+          (click)="alterarMes(+1)"
+        >
+          Prox.
+        </button>
+      </div>
+    </div>
+
+    <div class="calendario-dias">
+      <ng-container *ngFor="let dia of diasCalendario; let i = index">
+        <div *ngIf="i < 7">
+          <strong>{{ dia.data | date: "EEEEE" }}</strong>
+        </div>
+      </ng-container>
+
+      <div
+        *ngFor="let dia of diasCalendario; let i = index"
+        class="calendario-dia"
+        [class.calendario-quebrar-linha]="i % 7 === 0"
+        [class.calendario-dia-nao-faz-parte-mes-atual]="
+          dataAtual.getMonth() !== dia.data.getMonth()
+        "
+        [class.calendario-dia-reserva]="dia.statusHospedagem == 1"
+      >
+        <a
+          *ngIf="dia.statusHospedagem != 1; else diaReservadoBlock"
+          class="nav-link"
+          [class.calendario-dia-checkin]="dia.statusHospedagem == 2"
+          [class.calendario-dia-checkout]="dia.statusHospedagem == 3"
+          [class.calendario-dia-semReserva]="dia.statusHospedagem == 0"
+          (click)="defineDia(dia.data)"
+        >
+          {{ dia.data | date: "dd" }}
+        </a>
+        <ng-template #diaReservadoBlock>
+          {{ dia.data | date: "dd" }}</ng-template
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-5 p-3" style="margin-left: 30px;">
+    <div class="row h3 text-center">
+      <label for="quarto"> Quarto Selecionado</label>
+      <select
+        (change)="alterarQuarto($event.target)"
+        class="form-control text-center fw-bolder"
+        id="quartoAtual"
+        type="text"
+        name="quartoAtual"
+      >
+        <option *ngFor="let quarto of quartos" [value]="quarto.id">
+          {{ quarto.descricao }}
+        </option>
+      </select>
+      <label class="fw-bolder mt-2" for="valorQuarto">
+        Valor Diária Quarto
+       </label>
+        <p type="number" id="valorQuarto" name="valorQuarto" disabled="disabled"
+       >{{quartoAtual.valor| currency: "BRL"}} </p>
+
+    </div>
+    <div class="row h3 mt-1 text-center">
+      <label for="hospedeAtual"> Hospede Selecionado</label>
+
+      <select (change)="alteraHospede($event.target)"
+        class="form-control text-center fw-bolder"
+        id="hospedeAtual"
+        type="text"
+        name="hospedeAtual">
+        <option *ngFor="let hospedeAtual of hospedes" [value]="hospedeAtual.id">
+          {{ hospedeAtual.nome }}
+        </option>
+
+      </select>
+    </div>
+
+    <div class="row text-info" style="font-size: 20px;">
+      <div class="col-6">Dia CheckIn:{{ dataCheckIn | date: "dd-MM" }}</div>
+      <div class="col-6">Dia CheckOut:{{ dataCheckOut | date: "dd-MM" }}</div>
+      <div>Dias Reservados: {{qtdDiasReservados}} </div>
+    </div>
+
+    <div class="row">
+      <div class="row mt-5 mb-2">
+
+        <label for="observacoes">Observações da Hospedagem</label>
+        <textarea class="form-text" name="observacoes" id="observacoes" [(ngModel)]="observacoes">
+        </textarea>
+      </div>
+
+      <li class="list-group">
+        <ul class="list-group-item">
+          <input (click)="recalculaValor($event.target)" type="radio" value="1" name="quantidadeDeHospedes" [(ngModel)]="quantidadeDeHospedes"  > 1 Hospede
+        </ul>
+        <ul class="list-group-item">
+          <input  (click)="recalculaValor($event.target)" type="radio" value="2" name="quantidadeDeHospedes" [(ngModel)]="quantidadeDeHospedes" > 2 Hospedes
+        </ul>
+        <ul class="list-group-item">
+          <input  (click)="recalculaValor($event.target)" type="radio" value="3" name="quantidadeDeHospedes" [(ngModel)]="quantidadeDeHospedes" > 3 Hospedes
+        </ul>
+     </li>
+
+     <label class="fw-bolder" for="valorTotalReserva">
+      Valor total da Hospedagem
+     </label>
+     <p type="number" id="valorTotalReserva" name="valorTotalReserva" disabled="disabled"
+     >{{valorTotalReserva | currency: "BRL"}} </p>
+    </div>
+
+
+
+
+
+    <div class="row" >
+      <a (click)="criarHospedagem()" class="btn btn-outline-dark">Criar Hospedagem</a>
+    </div>
+  </div>
+</div>

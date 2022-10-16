@@ -1,0 +1,13 @@
+<h2>Quartos Existentes</h2>
+<table class="table-latitude" >
+  <thead>
+    <th>Descrição Quarto</th>
+    <th>Valor</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let quarto of quartos">
+        <td>{{quarto?.descricao}}</td>
+        <td>{{quarto?.valor | currency: "BRL"}}</td>
+    </tr>
+  </tbody>
+</table>

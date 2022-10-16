@@ -1,0 +1,14 @@
+<form (ngSubmit)="criarQuarto()">
+    <h2>Criar Novo Quarto</h2>
+
+      <div class="form-group">
+        <label for="descricao"> Descricao</label>
+        <input class="form-control" id="descricao" type="text" [(ngModel)]="quarto.descricao" name="descricao" placeholder="Descrição do Quarto">
+      </div>
+      <div class="form-group">
+        <label for="valor"> Valor</label>
+        <input  class="form-control" id="valor" type="number" [(ngModel)]="quarto.valor" name="valor" placeholder="Valor Da Diária">
+      </div>
+    <button class="btn btn-outline-secondary" type="submit" name="submit" id="submit" value="Submit"> Cadastrar </button>
+  </form>
+  <body>

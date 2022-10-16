@@ -1,0 +1,22 @@
+<h2>Hospedagens Cadastradas</h2>
+<table class="table-latitude" >
+  <thead>
+    <th>Hospede</th>
+    <th>Quarto</th>
+    <th>Data de Check-In</th>
+    <th>Data de Check-Out</th>
+    <th>Status</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hospedagem of hospedagens">
+        <td>{{hospedagem?.hospede.nome}}</td>
+        <td>{{hospedagem?.quarto.descricao }}</td>
+        <td>{{hospedagem?.dataCheckIn | date :'short'  }}</td>
+        <td>{{hospedagem?.dataCheckOut | date :'short' }}</td>
+        <td *ngIf="hospedagem?.statusHospedagem == 0">Reservado</td>
+        <td *ngIf="hospedagem?.statusHospedagem == 1">CheckedIn</td>
+        <td *ngIf="hospedagem?.statusHospedagem == 2">CheckedOut</td>
+        <td *ngIf="hospedagem?.statusHospedagem == 3">Cancelada</td>
+    </tr>
+  </tbody>
+</table>

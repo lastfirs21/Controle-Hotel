@@ -1,0 +1,51 @@
+<div class="container">
+
+  <form class="w-50" (ngSubmit)="criarHospede()">
+    <h2>Novo Cadastro Hospede</h2>
+    <div  class="form-group">
+      <label for="nome"> Nome Completo</label>
+      <input class="form-control"  id="nome" type="text" [(ngModel)]="hospede.nome" name="nome">
+    </div>
+    <div class="form-group">
+      <label for="cpf"> CPF</label>
+      <input class="form-control" id="cpf" type="text" [(ngModel)]="hospede.cpf" name="cpf">
+    </div>
+    <div class="form-group">
+      <label for="dataNasc"> Data de Nascimento</label>
+      <input class="form-control" id="dataNasc" type="date" [(ngModel)]="hospede.dataNasc" name="dataNasc">
+    </div>
+    <div class="form-group">
+      <label for="cep"> CEP</label>
+      <input class="form-control" id="cep" type="text" [(ngModel)]="hospede.cep" name="cep">
+    </div>
+    <div class="form-group">
+      <label for="estado"> Estado</label>
+      <input class="form-control" id="estado" type="text" [(ngModel)]="hospede.estado" name="estado">
+    </div>
+    <div class="form-group">
+      <label for="cidade"> Cidade</label>
+      <input class="form-control" id="cidade" type="text" [(ngModel)]="hospede.cidade" name="cidade">
+    </div>
+    <div class="form-group">
+      <label for="rua"> Rua</label>
+      <input class="form-control" id="rua" type="text" [(ngModel)]="hospede.rua" name="rua">
+    </div>
+    <div class="form-group">
+      <label for="numero"> Número</label>
+      <input class="form-control" id="numero" type="text" [(ngModel)]="hospede.numero" name="numero">
+    </div>
+    <div class="form-group">
+      <label for="bairro"> Bairro</label>
+      <input class="form-control" id="bairro" type="text" [(ngModel)]="hospede.bairro" name="bairro">
+    </div>
+    <div class="form-group">
+      <label for="complemento"> Complemento</label>
+      <input class="form-control" id="complemento" type="text" [(ngModel)]="hospede.complemento" name="complemento">
+    </div>
+
+
+    <button class="btn btn-outline-secondary" type="submit"> Cadastrar Novo Hospede </button>
+  </form>
+</div>
+
+
